@@ -16,15 +16,19 @@ contract _MyTokenJasnoor is ERC20, Ownable {
         require(_amount > 0, "Amount should be greater than zero");
         _mint(_sendto, _amount);
     }
-      function _burnthetoken (address _toburn, uint256 _amount) public  {  
-         if (_amount <= 0) {
+ 
+    function burnMyTokens(uint256 _amount) public {
+        if (_amount <= 0) {
             revert("Amount to burn should be greater than zero");
         }
-        _burn(_toburn, _amount);
+        require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
+        _burn(msg.sender, _amount);
     }
-      function _Transferthetoken (address _toanother, uint256 _amounttransfer) public returns (bool) {
-         require(_amounttransfer > 0, "Amount should be greater than zero");
-        return super.transfer(_toanother, _amounttransfer);
-        
-    }               
+
+    function customTransfer(address _to, uint256 _amount) public {
+        require(_amount > 0, "Amount should be greater than zero");
+        require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
+
+        _transfer(msg.sender, _to, _amount);
+    }
 }
