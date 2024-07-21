@@ -25,7 +25,7 @@ contract _MyTokenJasnoor is ERC20, Ownable {
         _burn(msg.sender, _amount);
     }
 
-    function customTransfer(address _to, uint256 _amount) public {
+    function TransfertheTokens(address _to, uint256 _amount) public {
         require(_amount > 0, "Amount should be greater than zero");
         require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
 
