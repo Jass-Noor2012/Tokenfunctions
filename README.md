@@ -12,11 +12,6 @@ To run this program, you can use Remix, an online Solidity IDE. To get started, 
 Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension.Copy and paste the following code into the file:
 
 ```javascript
-// Requirements
-// show the Functionality of :
-// 1. Only contract owner should be able to mint tokens
-// 2. Any user can transfer tokens
-// 3. Any user can burn tokens
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
