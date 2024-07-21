@@ -1,0 +1,30 @@
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+
+contract _MyTokenJasnoor is ERC20, Ownable {
+    constructor(string memory tokenName,string memory symbol)
+        ERC20(tokenName, symbol)
+        Ownable(msg.sender)
+    {}
+
+    function _minttoken (address _sendto, uint256 _amount) public onlyOwner {
+        require(_amount > 0, "Amount should be greater than zero");
+        _mint(_sendto, _amount);
+    }
+      function _burnthetoken (address _toburn, uint256 _amount) public  {  
+         if (_amount <= 0) {
+            revert("Amount to burn should be greater than zero");
+        }
+        _burn(_toburn, _amount);
+    }
+      function _Transferthetoken (address _toanother, uint256 _amounttransfer) public returns (bool) {
+         require(_amounttransfer > 0, "Amount should be greater than zero");
+        return super.transfer(_toanother, _amounttransfer);
+        
+    }               
+}
