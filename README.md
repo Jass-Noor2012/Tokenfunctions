@@ -12,6 +12,7 @@ To run this program, you can use Remix, an online Solidity IDE. To get started, 
 Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension.Copy and paste the following code into the file:
 
 ```javascript
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -29,17 +30,21 @@ contract _MyTokenJasnoor is ERC20, Ownable {
         require(_amount > 0, "Amount should be greater than zero");
         _mint(_sendto, _amount);
     }
-      function _burnthetoken (address _toburn, uint256 _amount) public  {  
-         if (_amount <= 0) {
+ 
+    function burnMyTokens(uint256 _amount) public {
+        if (_amount <= 0) {
             revert("Amount to burn should be greater than zero");
         }
-        _burn(_toburn, _amount);
+        require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
+        _burn(msg.sender, _amount);
     }
-      function _Transferthetoken (address _toanother, uint256 _amounttransfer) public returns (bool) {
-         require(_amounttransfer > 0, "Amount should be greater than zero");
-        return super.transfer(_toanother, _amounttransfer);
-        
-    }               
+
+    function customTransfer(address _to, uint256 _amount) public {
+        require(_amount > 0, "Amount should be greater than zero");
+        require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
+
+        _transfer(msg.sender, _to, _amount);
+    }
 }
 ```
 To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.20" (or another compatible version), and then click on the "Compile create and Myfunction.sol" button.
